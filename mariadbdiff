@@ -15,17 +15,4 @@ TARGET_DIR=$(dirname "$2")
 SOURCE_FILE=$(basename "$1")
 TARGET_FILE=$(basename "$2")
 
-CONTAINER_ID=$(docker run -v ${SOURCE_DIR}:/source_schema -v ${TARGET_DIR}:/target_schema -e MYSQL_ROOT_PASSWORD=root -d -l mariadbdiff --rm mariadb:10.1)
-sleep 20
-
-# Step 2. Drop (any) existing schemas
-docker exec $CONTAINER_ID mysql -proot -e "DROP DATABASE IF EXISTS source; CREATE DATABASE source;"
-docker exec $CONTAINER_ID mysql -proot -e "DROP DATABASE IF EXISTS target; CREATE DATABASE target;"
-
-# Step 3. Insert schemas
-docker exec $CONTAINER_ID sh -c 'mysql -proot source < /source_schema/'"$SOURCE_FILE"
-docker exec $CONTAINER_ID sh -c 'mysql -proot target < /target_schema/'"$TARGET_FILE"
-
-docker run --link $CONTAINER_ID:mariadb luciditysoftware/dbdiff
-
-
+docker run -v $SOURCE_DIR:/source_schema -v $TARGET_DIR:/target_schema luciditysoftware/mariadbdiff $SOURCE_FILE $TARGET_FILE

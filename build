@@ -1,1 +1,1 @@
-docker build --no-cache -f Dockerfile -t luciditysoftware/dbdiff:latest .
+docker build --no-cache -f Dockerfile -t luciditysoftware/mariadbdiff:latest .
