@@ -1,6 +1,6 @@
 {
   "name": "mariadbdiff",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Performs a diff from two schemas",
   "bin": {
     "mariadbdiff": "./mariadbdiff"
