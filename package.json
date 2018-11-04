@@ -2,7 +2,9 @@
   "name": "mariadbdiff",
   "version": "1.0.0",
   "description": "Performs a diff from two schemas",
-  "main": "mariadbdiff",
+  "bin": {
+    "mariadbdiff": "./mariadbdiff"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
