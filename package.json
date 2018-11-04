@@ -1,0 +1,24 @@
+{
+  "name": "mariadbdiff",
+  "version": "1.0.0",
+  "description": "Performs a diff from two schemas",
+  "main": "mariadbdiff",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/crusepartnership/mariadbdiff.git"
+  },
+  "keywords": [
+    "cli",
+    "mariadb",
+    "diff"
+  ],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/crusepartnership/mariadbdiff/issues"
+  },
+  "homepage": "https://github.com/crusepartnership/mariadbdiff#readme"
+}
