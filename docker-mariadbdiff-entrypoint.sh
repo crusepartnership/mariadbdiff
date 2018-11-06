@@ -92,19 +92,26 @@ parse_commandline ()
 parse_commandline "$@"
 
 
+
 # start MySQL
 /docker-entrypoint.sh mysqld > /dev/null 2>&1 &
 
-
 # Wait for MySQL to start
-sleep 20
+for i in {1..30}
+do
+   if [[ $(mysqladmin -uroot -proot -hlocalhost --silent ping) ]]; then
+      break
+   fi
+   sleep 1
+done
+
 
 # Create Databases
-mysql -proot -e "DROP DATABASE IF EXISTS source; CREATE DATABASE source;"
-mysql -proot -e "DROP DATABASE IF EXISTS target; CREATE DATABASE target;"
+mysql -uroot -proot -e "DROP DATABASE IF EXISTS source; CREATE DATABASE source;"
+mysql -uroot -proot -e "DROP DATABASE IF EXISTS target; CREATE DATABASE target;"
 
-mysql -proot source < /source_schema/$_arg_source_file
-mysql -proot target < /target_schema/$_arg_target_file
+mysql -uroot -proot source < /source_schema/$_arg_source_file
+mysql -uroot -proot target < /target_schema/$_arg_target_file
 
 
 /usr/local/bin/dbdiff --server1=root:root@localhost server1.source:server1.target --output=/tmp/diff.sql > /dev/null 2>&1
